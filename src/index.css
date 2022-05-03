@@ -2,35 +2,28 @@
 
 :root {
     --primary-color: rgb(21, 28, 31);
-    --green-color100: #222c30;
-    --terminal-green-color: #6be748;
+    --green-color100: rgb(34, 44, 48);
+    --terminal-green-color: rgb(107, 231, 72);
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'IBM Plex Mono', monospace;
 }
 
-.hide {
-    visibility: hidden;
-}
 
 /************************************************************ _body_ ************************************************************/
 body {
     transition: all .5s ease;
 }
 
-#app {
-    margin: 43px 29px 0 129px;
+#root {
+    margin: 40px 40px 0 40px;
     line-height: 1.5;
     font-size: 18px;
     font-weight: 500;
-}
-
-h1 {
-    margin-bottom: 15px;
 }
 
 a {
@@ -40,18 +33,12 @@ a {
 
 
 /************************************************************ _term_ ************************************************************/
-.terminalCont{
+.terminal {
     width: 100%;
     opacity: 1;
 }
 
-.userEnteredText{
-    margin: 0;
-    padding: 0;
-    display: inline-block;
-}
-
-#terminalReslutsCont{
+#termHistory {
     width: 100%;      /* Margin input field */
     overflow-y: auto;
     resize: none;
@@ -66,7 +53,7 @@ a {
     font-weight: bold;
 }
 
-#terminalTextInput{
+#termInput {
     margin-bottom: 20px;
     background: transparent;
     border: none;
@@ -75,26 +62,29 @@ a {
     color: #fff;
     outline: none;
 }
+
+.banner {
+    white-space: pre-wrap;
+    line-height: normal;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
 /************************************************************ _term_ ************************************************************/
 
 
 /******************************************************** media_queries *********************************************************/
 @media screen and (max-width: 768px) {
-    .sidebar {
-        visibility: hidden;
-    }
-
-    .mobile-bar {
-        visibility: visible;
-    }
-
-    #app {
+    #root {
         margin: 29px 29px 0 29px;
     }
 
-    #terminalTextInput{
+    #termInput {
         width: 66%;
-        margin-bottom: calc(98px);
+        margin-bottom: 40px;
+    }
+
+    .banner {
+        font-size: .58rem;
     }
 }
 /******************************************************** media_queries *********************************************************/
