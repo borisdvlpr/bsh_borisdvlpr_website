@@ -1,11 +1,13 @@
-# FROM node:14
+FROM node:14
 
-# WORKDIR /build
+WORKDIR /tmp
 
-# COPY package*.json ./
-# RUN npm install
+COPY package*.json ./
+RUN npm install
 
-# COPY . .
+COPY . .
 
-# EXPOSE 8080
-# CMD ["node", "server.js"]
+RUN ["npm", "run", "build"]
+
+EXPOSE 8080
+CMD ["npm", "start"]

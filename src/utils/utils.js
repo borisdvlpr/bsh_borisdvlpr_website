@@ -1,15 +1,10 @@
-const addTextToResults = (textToAdd) => {
-	document.getElementById('termHistory').innerHTML += `<p>${textToAdd}</p>`;
-	scrollToBottomOfResults();
-};
-
 const scrollToBottomOfResults = () => {
-	const terminalResultsDiv = document.getElementById('termHistory');
-	terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
+	const termHistory = document.getElementById('termHistory');
+	termHistory.scrollTop = termHistory.scrollHeight;
 };
 
 const clearInput = () => {
 	document.getElementById('termInput').value = '';
 };
 
-export { addTextToResults, scrollToBottomOfResults, clearInput };
+export { scrollToBottomOfResults, clearInput };

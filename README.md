@@ -4,6 +4,10 @@ Terminal style portfolio.
 
 ![bsh logo](public/background.png)
 
+## Why?
+
+Huge terminal fan and heavy user. Wanted to create something different from the boring classic website portfolio, based on my experience.
+
 ## Get Started
 
 ### On Node
@@ -14,13 +18,19 @@ Terminal style portfolio.
    - npm install 
    ```
 
-2. Start the server
+2. Build the project
+
+   ```bash
+   - npm run build
+   ```
+
+3. Start the server
 
    ```bash
    - npm start
    ```
 
-3. Open `localhost` in a web browser, using the port specified in `server.js` e.g. <http://localhost:8080/>
+4. Open `localhost` in a web browser, using the port specified in `server.js` e.g. <http://localhost:8000/>
 
 ### On Docker
 
@@ -62,7 +72,7 @@ Written on:
 
 - HTML5
 - CSS3
-- JS (ES6)
+- JS (ES6) & JSX
 
 Frameworks & Libraries:
 

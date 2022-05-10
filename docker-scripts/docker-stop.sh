@@ -1,2 +1,2 @@
-# docker stop bsh-borisdvlpr-website
-# docker ps
+docker stop bsh-borisdvlpr-website
+docker ps

@@ -1,83 +1,128 @@
-import React, { useEffect } from 'react';
-import { addTextToResults, scrollToBottomOfResults, clearInput } from './utils/utils';
+import React, { useState, useEffect } from 'react';
+import useHistory from './hooks/useHistory';
+import { scrollToBottomOfResults, clearInput } from './utils/utils';
+import getWeather from './api/index';
+import * as commands from './utils/commands';
 import banner from './utils/banner';
 
 function App() {
-	function run() {
-		addTextToResults(banner);
-		document.getElementById('termInput').focus();
+	const [history, updateHistory, deleteHistory] = useHistory();
+	const [inputText, setInputText] = useState('');
 
-		document.addEventListener('keydown', () => {
-			document.getElementById('form').onsubmit = (evt) => {
-				evt.preventDefault();
-				const inputText = document.getElementById('termInput').value.trim();
+	async function commandExec(textInputValue) {
+		let apiReq;
 
-				if (inputText !== '') {
-					textReplies(inputText);
-				}
+		const splittedInput = textInputValue.trim().split(' ');
+		clearInput();
 
-				window.scrollTo(0, document.body.scrollHeight);
-			};
+		switch (splittedInput[0].toLowerCase()) {
+		case 'about':
+			updateHistory([`> ${splittedInput[0]}`, commands.about()]);
+			break;
 
-			scrollToBottomOfResults();
+		case 'banner':
+			updateHistory([`> ${splittedInput[0]}`, banner()]);
+			break;
 
-			const postHelpList = () => {
-				const helpKeyWords = [
-					'Available commands:',
-					'clear',
-					'help',
-					'whoami',
-				].join('<br>');
-				addTextToResults(helpKeyWords);
-			};
+		case 'clear':
+			deleteHistory();
+			break;
 
-			const textReplies = (textInputValue) => {
-				addTextToResults(`> ${textInputValue}`);
+		case 'date':
+			updateHistory([`> ${splittedInput[0]}`, commands.date()]);
+			break;
 
-				const splittedInput = textInputValue.split(' ');
+		case 'echo':
+			updateHistory([`> ${splittedInput[0]}`, textInputValue.slice(5)]);
+			break;
 
-				switch (splittedInput[0].toLowerCase()) {
-				case 'banner':
-					clearInput();
-					addTextToResults(banner);
-					break;
+		case 'help':
+			updateHistory([`> ${splittedInput[0]}`, commands.help()]);
+			break;
 
-				case 'clear':
-					clearInput();
-					document.getElementById('termHistory').innerHTML = '';
-					break;
+		case 'instagram':
+			updateHistory([`> ${splittedInput[0]}`, commands.instagram()]);
+			break;
 
-				case 'help':
-					clearInput();
-					postHelpList();
-					break;
+		case 'linkedin':
+			updateHistory([`> ${splittedInput[0]}`, commands.linkedin()]);
+			break;
 
-				case 'whoami':
-					clearInput();
-					addTextToResults('guest');
-					break;
+		case 'mail':
+			updateHistory([`> ${splittedInput[0]}`, commands.mail()]);
+			break;
 
-				default:
-					clearInput();
-					addTextToResults('<p><i>bsh: command not found: ' + `<b>${textInputValue}</b>` + '</i></p>');
-					break;
-				}
-			};
-		});
+		case 'man':
+			updateHistory([`> ${textInputValue}`, commands.man(splittedInput[1])]);
+			break;
+
+		case 'projects':
+			updateHistory([`> ${splittedInput[0]}`, commands.projects()]);
+			break;
+
+		case 'theme':
+			updateHistory([`> ${textInputValue}`, commands.theme(splittedInput[1])]);
+			break;
+
+		case 'twitter':
+			updateHistory([`> ${splittedInput[0]}`, commands.twitter()]);
+			break;
+
+		case 'weather':
+			apiReq = await getWeather(splittedInput[1]);
+			updateHistory([`> ${textInputValue}`, apiReq]);
+			break;
+
+		case 'whoami':
+			updateHistory([`> ${splittedInput[0]}`, commands.whoami()]);
+			break;
+
+		default:
+			updateHistory([`> ${textInputValue}`, commands.noCommand(textInputValue)]);
+			break;
+		}
+	}
+
+	function onInputChange(evt) {
+		const trimmedInput = evt.target.value;
+		setInputText(trimmedInput);
+	}
+
+	function formSubmit(evt) {
+		evt.preventDefault();
+
+		if (inputText !== '') { commandExec(inputText); }
+
+		setInputText('');
+
+		window.scrollTo(0, document.body.scrollHeight);
+		scrollToBottomOfResults();
 	}
 
 	useEffect(() => {
 		document.title = '~ (-bsh)';
-		run();
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+			commands.theme('light');
+		} else {
+			commands.theme('dark');
+		}
+
+		updateHistory(['', banner()]);
+		document.getElementById('termInput').focus();
 	}, []);
 
 	return (
 		<div className="terminal">
-			<div id="termHistory" />
+			<div id="termHistory">
+				{history.map((results) => (
+					results.map((result) => (
+						<p className="text-line">{result}</p>
+					))))}
+			</div>
 
-			<form id="form">
-				<label id="inputLabel" htmlFor="termInput">guest@bsh $ </label>
-				<input id="termInput" type="text" placeholder="Type 'help' for more info..." autoComplete="off" />
+			<form id="form" onSubmit={(evt) => formSubmit(evt)}>
+				<label id="inputLabel" className="text-line" htmlFor="termInput">guest@bsh $ </label>
+				<input id="termInput" className="text-line" value={inputText} type="text" placeholder="Type 'help' for more info..." autoComplete="off" onChange={(evt) => onInputChange(evt)} />
 			</form>
 		</div>
 	);

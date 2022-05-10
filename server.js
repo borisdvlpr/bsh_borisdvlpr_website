@@ -5,4 +5,4 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.listen(process.env.PORT || 8080, () => console.log('Build running at localhost:8080'));
+app.listen(process.env.PORT || 8000, () => console.log('Build running at localhost:8000'));

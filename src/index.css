@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 :root {
     --primary-color: rgb(21, 28, 31);
     --green-color100: rgb(34, 44, 48);
     --terminal-green-color: rgb(107, 231, 72);
+    --font-size: .9rem;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'Source Code Pro', monospace;
 }
 
 
@@ -21,13 +22,15 @@ body {
 
 #root {
     margin: 40px 40px 0 40px;
-    line-height: 1.5;
-    font-size: 18px;
+    font-size: var(--font-size);
     font-weight: 500;
+    
 }
 
-a {
-    color: var(--terminal-green-color);
+.text-line {
+    white-space: pre-wrap;
+    line-height: normal;
+    margin-top: 5px;
 }
 /************************************************************ _body_ ************************************************************/
 
@@ -39,54 +42,68 @@ a {
 }
 
 #termHistory {
-    width: 100%;      /* Margin input field */
-    overflow-y: auto;
+    width: 100%;
     resize: none;
     border: none;
-    font-size: 14px;
-    line-height: 22px;
     display: block;
+    
 }
 
 #inputLabel {
-    font-size: 14px;
     font-weight: bold;
 }
 
 #termInput {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     background: transparent;
     border: none;
     width: 80%;
-    font-size: 14px;
+    font-size: var(--font-size);
     color: #fff;
     outline: none;
-}
-
-.banner {
-    white-space: pre-wrap;
-    line-height: normal;
-    font-size: 1rem;
-    margin-bottom: 20px;
 }
 /************************************************************ _term_ ************************************************************/
 
 
 /******************************************************** media_queries *********************************************************/
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 739px) {
+    #termInput {
+        width: 66%;
+    }
+}
+
+@media screen and (max-width: 499px) {
     #root {
-        margin: 29px 29px 0 29px;
+        margin: 28px 28px 0 28px;
+        font-size: calc(.6rem + 1vw);
     }
 
     #termInput {
-        width: 66%;
         margin-bottom: 40px;
-    }
-
-    .banner {
-        font-size: .58rem;
+        font-size: calc(.6rem + 1vw);
     }
 }
+
+@media screen and (max-width: 413px) {
+    #root {
+        font-size: calc(.54rem + 1vw);
+    }
+
+    #termInput {
+        font-size: calc(.54rem + 1vw);
+    }
+}
+
+@media screen and (max-width: 376px) {
+    #root {
+        font-size: calc(.5rem + 1vw);
+    }
+
+    #termInput {
+        font-size: calc(.5rem + 1vw);
+    }
+}
+
 /******************************************************** media_queries *********************************************************/
 
 
@@ -96,8 +113,8 @@ a {
     background-color: #fff;
 }
 
-.light-theme a {
-    color: var(--terminal-green-color);
+.light-theme #termInput {
+    color: var(--primary-color);
 }
 
 .dark-theme {
