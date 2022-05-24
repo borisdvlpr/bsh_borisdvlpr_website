@@ -1,0 +1,14 @@
+version: "3"
+services:
+  bsh_terminal:
+    image: borisdvlpr/bsh_terminal
+    build: ./
+    container_name: bsh_terminal
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app:ro
+    environment:
+      - CHOCKIDAR_USEPOLLING=true
+    # env_file
+    #   - ./.env

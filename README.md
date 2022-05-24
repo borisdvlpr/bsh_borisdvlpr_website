@@ -1,4 +1,4 @@
-# [bsh - borisdvlpr_website (v.1.0)](https://borisdev.net)
+# [bsh - borisdvlpr_website (v1.2.1)](https://borisdev.net)
 
 Terminal style portfolio.
 
@@ -12,59 +12,53 @@ Huge terminal fan and heavy user. Wanted to create something different from the 
 
 ### On Node
 
-1. Install all dependencies:
+After installing all dependencies with `npm install`, you can:
+
+1. Run the project on development mode. Open <http://localhost:8000/> to view it in the browser.
 
    ```bash
-   - npm install 
+   - npm run dev
    ```
 
-2. Build the project
+   The page will reload if you make edits. You will also see any lint errors in the console.
+
+#### OR
+
+1. Create a production build
 
    ```bash
    - npm run build
    ```
 
-3. Start the server
+2. Serve the production build. Open <http://localhost:8001/> to view it in the browser.
 
    ```bash
    - npm start
    ```
 
-4. Open `localhost` in a web browser, using the port specified in `server.js` e.g. <http://localhost:8000/>
-
-### On Docker
+### On Docker (development only)
 
 1. On Mac/Linux, run `docker-start.sh` on `/scrips` folder. Run `docker-stop.sh` to stop the container.
-2. Windows/"Scriptless" configuration:
-   1. Build a new docker image:
+2. "Scriptless" configuration:
+   1. Build and run the container:
 
       ```bash
-      docker build . -t borisdvlpr/bsh
+      docker-compose up
       ````
 
-   2. Create and run a new container:
+   2. Stop the container:
 
       ```bash
-      docker run -p 8080:8080 -d --name bsh-borisdvlpr-website borisdvlpr/bsh
-      ````
-
-   3. (OPTIONAL) See container status:
-
-      ```bash
-      docker ps
-      ````
-
-   4. Stop the container:
-
-      ```bash
-      docker stop bsh-borisdvlpr-website
+      docker stop bsh_terminal
       ```
 
-   5. (RE-RUNNING CONTAINER) After step `2.`, run the existing container with:
+   3. (OPTIONAL) Stop and remove container and network created on docker-compose:
 
       ```bash
-      docker start bsh-borisdvlpr-website
+      docker-compose down
       ```
+
+More information on how to run build and run a container inside `docker-start.sh` on `/scrips`, with line by line execution and explanation.
 
 ## Info  
 

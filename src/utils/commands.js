@@ -9,12 +9,14 @@ const commandsList = [
 	'clear\n',
 	'date\n',
 	'echo\n',
+	'github\n',
 	'help\n',
 	'instagram\n',
 	'linkedin\n',
 	'mail\n',
 	'man\n',
 	'projects\n',
+	'repo\n',
 	'theme\n',
 	'twitter\n',
 	'weather\n',
@@ -35,6 +37,12 @@ Computer Science department of my college, Universidade Lusófona (ULHT).\n
 `;
 
 const date = () => `${today.toLocaleDateString(undefined, options)} ${time}`;
+
+const github = () => {
+	window.open('https://github.com/borisdvlpr');
+	return 'Opening github...';
+};
+
 const help = () => commandsList;
 
 const instagram = () => {
@@ -70,6 +78,9 @@ const man = (command) => {
 		case 'echo':
 			return 'Usage: echo <text>\nPrints text inserted.';
 
+		case 'github':
+			return 'Usage: github\nOpens github account.';
+
 		case 'help':
 			return 'Usage: help\nShows all available commands.';
 
@@ -87,6 +98,9 @@ const man = (command) => {
 
 		case 'projects':
 			return 'Usage: projects\nShows list of developed/under development projects.';
+
+		case 'repo':
+			return 'Usage: repo\nOpens github repo of this project.';
 
 		case 'theme':
 			return 'Usage: theme <option>\nSwitches terminal theme.\nOptions available: dark | light';
@@ -109,6 +123,11 @@ const man = (command) => {
 };
 
 const projects = () => projectsList;
+
+const repo = () => {
+	window.open('https://github.com/borisdvlpr/bsh_borisdvlpr_website/');
+	return 'Opening github...';
+};
 
 const theme = (color) => {
 	if (color === 'light') {
@@ -141,12 +160,14 @@ const noCommand = (comm) => `bsh: command not found: ${comm}`;
 export {
 	about,
 	date,
+	github,
 	help,
 	instagram,
 	linkedin,
 	mail,
 	man,
 	projects,
+	repo,
 	theme,
 	twitter,
 	whoami,

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useHistory from './hooks/useHistory';
-import { scrollToBottomOfResults, clearInput } from './utils/utils';
+import clearInput from './utils/utils';
 import getWeather from './api/index';
 import * as commands from './utils/commands';
 import banner from './utils/banner';
@@ -8,6 +8,8 @@ import banner from './utils/banner';
 function App() {
 	const [history, updateHistory, deleteHistory] = useHistory();
 	const [inputText, setInputText] = useState('');
+	const historyEndRef = useRef(null);
+	const scrollToBottom = () => { historyEndRef.current.scrollIntoView({ behavior: 'auto' }); };
 
 	async function commandExec(textInputValue) {
 		let apiReq;
@@ -36,6 +38,10 @@ function App() {
 			updateHistory([`> ${splittedInput[0]}`, textInputValue.slice(5)]);
 			break;
 
+		case 'github':
+			updateHistory([`> ${splittedInput[0]}`, commands.github()]);
+			break;
+
 		case 'help':
 			updateHistory([`> ${splittedInput[0]}`, commands.help()]);
 			break;
@@ -58,6 +64,10 @@ function App() {
 
 		case 'projects':
 			updateHistory([`> ${splittedInput[0]}`, commands.projects()]);
+			break;
+
+		case 'repo':
+			updateHistory([`> ${splittedInput[0]}`, commands.repo()]);
 			break;
 
 		case 'theme':
@@ -94,9 +104,6 @@ function App() {
 		if (inputText !== '') { commandExec(inputText); }
 
 		setInputText('');
-
-		window.scrollTo(0, document.body.scrollHeight);
-		scrollToBottomOfResults();
 	}
 
 	useEffect(() => {
@@ -111,13 +118,17 @@ function App() {
 		document.getElementById('termInput').focus();
 	}, []);
 
+	useEffect(scrollToBottom, [history]);
+
 	return (
 		<div className="terminal">
 			<div id="termHistory">
 				{history.map((results) => (
 					results.map((result) => (
 						<p className="text-line">{result}</p>
-					))))}
+					))
+				))}
+				<div ref={historyEndRef} />
 			</div>
 
 			<form id="form" onSubmit={(evt) => formSubmit(evt)}>
