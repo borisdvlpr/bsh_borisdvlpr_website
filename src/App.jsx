@@ -107,7 +107,6 @@ function App() {
 	}
 
 	useEffect(() => {
-		document.title = 'borisdvlpr: Terminal';
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
 			commands.theme('light');
 		} else {

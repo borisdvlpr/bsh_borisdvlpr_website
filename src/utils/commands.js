@@ -28,7 +28,7 @@ const projectsList = [
 	'DEISI Website -> Computer Science Department @ ULHT (https://deisi.ulusofona.pt - under development)\n',
 ];
 
-const about = () => `My main focus from the very fisrt beginning has been frontend development. Yet, for the last few months i've been
+const about = () => `My main focus from the very first beginning has been frontend development. Yet, for the last few months i've been
 focused on backend development. The two main languages I use are JavaScript and Python.\n
 For frontend development, I usually interact with React (JSX), Vanilla JS and CSS/SCSS and for backend development 
 I mostly use NodeJS. I also have a little experience with Django, MySQL, REST API's and Docker.\n

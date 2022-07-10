@@ -1,4 +1,4 @@
-# [bsh - borisdvlpr_website (v1.2.1)](https://borisdev.net)
+# [bsh - borisdvlpr_website (v1.2.3)](https://borisdev.net)
 
 Terminal style portfolio.
 
